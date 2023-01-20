@@ -14,7 +14,7 @@
 <body>
   <div class="container">
     <div class="profile">
-      <img class="darklight" src="./images/moon.png" id="icon" align="right">
+      <img class="darklight" src="./images/moon.png" id="icon" align="right" title="Dark Mode">
       <div class="profile_container">
         <div class="profile_profileImg">
           <img src="./images/profileImage.png" alt="Parvaiz Ahmad">
@@ -287,8 +287,10 @@
       document.body.classList.toggle("dark-theme");
       if (document.body.classList.contains("dark-theme")) {
         icon.src = "./images/sun.png";
+        icon.title = "Light Mode";
       } else {
         icon.src = "./images/moon.png";
+        icon.title = "Dark Mode";
       }
     }
   </script>
