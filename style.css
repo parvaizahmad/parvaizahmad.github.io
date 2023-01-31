@@ -74,7 +74,7 @@ a {
 
 /* layouts */
 .container {
-	max-width: 1000px;
+	max-width: 1500px;
 	width: 90%;
 	margin: 0 auto;
 	display: grid;
@@ -163,8 +163,10 @@ a {
 }
 
 .downloadBtn {
+	background-color: transparent;
+	color: var(--text-color);
 	display: block;
-	text-decoration: underline;
+	border: none;
 	font-size: 1.6rem;
 	margin-top: 1rem;
 }

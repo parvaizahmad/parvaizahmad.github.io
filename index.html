@@ -8,11 +8,14 @@
   <title>Parvaiz Ahmad's Resume</title>
   <link rel="icon" type="image/x-icon" href="./images/profileImage.png">
   <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" id="content">
     <div class="profile">
       <img class="darklight" src="./images/moon.png" id="icon" align="right" title="Dark Mode">
       <div class="profile_container">
@@ -29,7 +32,8 @@
             Team Lead with more than 5 years of experience on different embedded system products at Siemens previously
             known as Mentor Graphics®.
           </p>
-          <a class="downloadBtn" href="./ParvaizAhmadResume.pdf" download="ParvaizAhmadResume.pdf">Download Resume</a>
+          <!-- <a class="downloadBtn" href="./ParvaizAhmadResume.pdf" download="ParvaizAhmadResume.pdf">Download Resume</a> -->
+          <button class="downloadBtn" id="download-button">Download Resume</button>
         </div>
       </div>
     </div>
@@ -298,6 +302,19 @@
         icon.title = "Dark Mode";
       }
     }
+  </script>
+
+  <script>
+    const button = document.getElementById('download-button');
+
+    function generatePDF() {
+      // Choose the element that your content will be rendered to.
+      const element = document.getElementById('content');
+      // Choose the element and save the PDF for your user.
+      html2pdf().from(element).save();
+    }
+
+    button.addEventListener('click', generatePDF);
   </script>
 </body>
 
