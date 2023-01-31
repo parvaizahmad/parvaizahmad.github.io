@@ -260,6 +260,9 @@
           <p class="description">
             <a href="https://parvaiz.pk/" class="social_item">Online Resume</a>
           </p>
+          <p>
+            <a class="downloadBtn" id="saveAsPdfBtn" href="https://www.sejda.com/html-to-pdf">Save Resume as PDF</a>
+          </p>
 
         </div>
       </div>
@@ -319,6 +322,16 @@
     }
 
     button.addEventListener('click', generatePDF);
+  </script>
+
+
+  <script>
+    document.getElementById('saveAsPdfBtn').addEventListener('click', function (e) {
+      var pageUrl = encodeURIComponent(window.location.href);
+      var opts = ['save-link=' + pageUrl, 'pageOrientation=auto'];
+      window.open('https://www.sejda.com/html-to-pdf?' + opts.join('&'));
+      e.preventDefault();
+    });
   </script>
 </body>
 
