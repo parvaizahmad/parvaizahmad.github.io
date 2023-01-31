@@ -1,8 +1,10 @@
 body {
+    font-family: Inter, sans-serif;
     background-color: lightgray;
 }
 
 .containerform {
+    max-width: 1000px;
     width: auto%;
     margin: 50px auto;
     text-align: center;
