@@ -260,6 +260,21 @@ a {
 	color: var(--primary-color);
 }
 
+
+.cert_item {
+	/* margin-top: 1.5rem; */
+	font-size: 1.5rem;
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	justify-content: flex-start;
+	color: var(--text-color);
+}
+
+.cert_item:hover {
+	color: var(--primary-color);
+}
+
 .social_item svg {
 	width: 2rem;
 }
