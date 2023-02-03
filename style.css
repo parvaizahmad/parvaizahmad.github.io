@@ -8,15 +8,15 @@
 
 :root {
 	--primary-color: #ff7613;
-	--dark-color: #edf2fc;
-	--light-color: Black;
-	--text-color: grey;
+	--dark-color: #fff;
+	--light-color: #15202b;
+	--text-color: #8899a6;
 }
 
 .dark-theme {
-	--dark-color: #000106;
+	--dark-color: #15202b;
 	--light-color: #fff;
-	--text-color: #8d8d8d;
+	--text-color: #8899a6;
 }
 
 html {
