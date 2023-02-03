@@ -36,10 +36,11 @@
           <br>
           <!-- <a class="downloadBtn" href="./ParvaizAhmadResume.pdf" download="ParvaizAhmadResume.pdf">Download Resume</a> -->
           <!-- <button class="downloadBtn" id="download-button">Download Resume</button> -->
-          <a class="downloadBtn --hide-from-pdf" id="saveAsPdfBtn" href="https://parvaiz.pk/"><strong>Download
+          <a class="downloadBtn --hide-from-pdf"
+            href="https://www.sejda.com/html-to-pdf?save-link=https://parvaiz.pk&viewportWidth=1500"
+            target="_blank"><strong>Download
               Resume</strong></a>
-          <a class="downloadBtn --show-in-pdf" id="saveAsPdfBtn" href="https://parvaiz.pk/"
-            style="display:none"><strong>Online
+          <a class="downloadBtn --show-in-pdf" href="https://parvaiz.pk/" style="display:none"><strong>Online
               Resume</strong></a>
         </div>
       </div>
@@ -335,16 +336,6 @@
     }
 
     button.addEventListener('click', generatePDF);
-  </script>
-
-
-  <script>
-    document.getElementById('saveAsPdfBtn').addEventListener('click', function (e) {
-      var pageUrl = encodeURIComponent(window.location.href);
-      var opts = ['save-link=' + pageUrl, 'pageOrientation=auto'];
-      window.open('https://www.sejda.com/html-to-pdf?' + opts.join('&'));
-      e.preventDefault();
-    });
   </script>
 </body>
 
