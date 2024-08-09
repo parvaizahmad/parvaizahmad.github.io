@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parvaiz Ahmad's Resume</title>
+  <link rel="icon" type="image/x-icon" href="./images/profileImage.png">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container" id="content">
+    <div class="profile">
+      <h4 class="--hide-from-pdf" align="right">Theme</h4>
+      <img class="darklight --hide-from-pdf" src="./images/moon.png" alt="light-theme" id="icon" align="right" title="Dark Mode">
+      <div class="profile_container">
+        <div class="profile_profileImg">
+          <img src="./images/profileImage.png" alt="Parvaiz Ahmad">
+        </div>
+        <div>
+          <h1 class="profile_name">
+            <span class="profile_name_firstName">Parvaiz</span>
+            <span class="profile_name_lastName">Ahmad</span>
+          </h1>
+          <p class="profile_title">Senior Software Development Engineer</p>
+          <p class="description profile_description">
+            With over 7 years of professional experience at Siemens, specializing in QA, Automation, Python, C/C++ and related technologies.
+          </p>
+          <br>
+          <!-- <a class="downloadBtn" href="./ParvaizAhmadResume.pdf" download="ParvaizAhmadResume.pdf">Download Resume</a> -->
+          <!-- <button class="downloadBtn" id="download-button">Download Resume</button> -->
+          <a class="downloadBtn --hide-from-pdf"
+            href="https://www.sejda.com/html-to-pdf?save-link=https://parvaiz.pk/qa&viewportWidth=1500"
+            target="_blank"><strong>Download
+              Resume</strong></a>
+          <a class="downloadBtn --show-in-pdf" href="https://parvaiz.pk/" style="display:none"><strong>Online
+              Resume</strong></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-1">
+
+      <div class="exp">
+        <h3 class="title">Experience</h3>
+        <div class="exp_item">
+          <h4 class="item_title">Siemens</h4>
+          <p class="item_subtitle">Technical Lead</p>
+          <p class="item_preTitle">May, 2023 - Present</p>
+          <ul class="skills_list description">
+            <li>Automated build and test processes, reducing manual intervention and increasing deployment efficiency.</li>
+            <li>Developed and maintained CI/CD pipelines using GitLab CI and Jenkins, ensuring smooth and reliable code integration and delivery.</li>
+            <li>Scripted complex automation tasks using Python, enhancing operational workflows and reducing human error.</li>
+            <li>Integrated various tools and services into CI/CD pipelines, such as Docker, to support scalable and reliable deployments.</li>
+            <li>Conducted regular code reviews and provided mentorship on best practices for automation and DevOps processes, fostering a culture of continuous improvement.</li>
+            <li>Implemented Jenkins Job for building and performing static memory analysis of C/C++ applications using Python.</li>
+            <li>Transferred Jenkins Continuous Integration (CI) processes to GitLab CI, ensuring seamless workflow and integration.</li>
+            <li>Built and maintained Docker containers, creating custom images tailored to project-specific requirements to streamline the development and deployment processes.</li>
+            <li>Automated the creation, testing, and deployment of Docker images using CI/CD pipelines, ensuring consistency and efficiency across development environments.</li>
+            <li>Leveraged pytest for automated testing, scripting comprehensive test suites that improved code quality and coverage.</li>
+            <li>Developed automation scripts to generate detailed test reports and performance analysis, providing actionable insights for development teams.</li>
+            <li>Implemented automated report generation using tools like pytest-html and Allure, facilitating better visibility into test results and performance metrics.</li>
+            <li>Streamlined the process of managing GitLab releases, automating versioning, tagging, and deployment workflows to ensure reliable and traceable releases.</li>
+            <li>Conducted performance analysis and tuning for CI/CD pipelines, identifying bottlenecks and implementing optimizations to accelerate build and deployment times.</li>
+            <li>Created and maintained documentation for automated processes, providing clear guidelines and best practices for team members and stakeholders.</li>
+          </ul>
+        </div>
+        <div class="exp_item">
+          <h4 class="item_title">Siemens</h4>
+          <p class="item_subtitle">Technical Lead</p>
+          <p class="item_preTitle">January, 2021 - April, 2023</p>
+          <ul class="skills_list description">
+            <li>Proficient in C, C++, STL, Multi-Threading, Python, object-oriented programming (OOP) principles, cmake, gtest, pytest, Docker, Git, and Linux, demonstrating a diverse range of technical skills for efficient software development and collaboration.</li>
+            <li>C++ application development for ET-SoC-1, a cutting-edge massively parallel computing platform.</li>
+            <li>C applications development for Nucleus RTOS.</li>
+            <li>Developed a testing framework from scratch for automated testing of C++ applications using GDB on Linux based system.</li>
+            <li>Updated and improved significantly inhouse developed C++ testing framework.</li>
+            <li>Leveraged C to develop safety critical applications using Nucleus Safety Cert and PetaLinux.</li>
+            <li>Successfully refactored an exceptionally large project by revamping the versioning structure, incorporating Git submodules while preserving the complete commit history. Effectively resolved dependencies for different submodules.</li>
+            <li>Collaborated with an extensive and diverse international team spanning multiple countries, effectively managing communication and coordination.</li>
+            <li>Thrived in a fast-paced work environment, delivering high-quality results within tight deadlines.</li>
+            <li>Adapted quickly to new technologies and acquired knowledge rapidly to stay up-to-date with industry trends.</li>
+            <li>Demonstrated exceptional problem-solving skills, resolving complex technical challenges with efficiency and innovation.</li>
+          </ul>
+        </div>
+        <div class="exp_item">
+          <h4 class="item_title">Mentor Graphics®</h4>
+          <p class="item_subtitle">Senior Software Development Engineer</p>
+          <p class="item_preTitle">December, 2018 - December, 2020</p>
+          <ul class="skills_list description">
+            <li>C application development for Nucleus RTOS.</li>
+            <li>Worked on automation for driver testing.</li>
+            <li>Strong understanding of software debugging and testing techniques.</li>
+            <li>C applications for measuring performance and stability of multicore systems.</li>
+            <li>Application development for embedded linux.</li>
+          </ul>
+        </div>
+        <div class="exp_item">
+          <h4 class="item_title">Mentor Graphics®</h4>
+          <p class="item_subtitle">Software Development Engineer</p>
+          <p class="item_preTitle">July, 2017 - December, 2018</p>
+          <ul class="skills_list description">
+            <li>Polished and enhanced all technical skills by working within a divers and top-class engineer in industry.</li>
+            <li>Grew a better technical understanding especially on embedded systems, RTOS and architecture.</li>
+            <li>Grew a better technical understanding especially on embedded systems, RTOS and architecture.</li>
+            <li>Worked on testing of embedded software especially driver testing and OS testing.</li>
+            <li>Developed better communication skills.</li>
+            <li>Learned how to work with different teams in a very diverse environment as well as an individual.</li>
+            <li>Flourished a better understanding of time management and process management.</li>
+          </ul>
+        </div>
+        <div class="exp_item">
+          <h4 class="item_title">KICS UET Lahore</h4>
+          <p class="item_subtitle">Trainee Engineer</p>
+          <p class="item_preTitle">January, 2017 - June, 2017</p>
+          <ul class="skills_list description">
+            <li>Enhanced and polished knowledge of embedded systems.</li>
+            <li>Worked on 3D printer, Automatic Irrigation System, development and modification on innovative level.</li>
+            <li>Developed Technical report writing skills.</li>
+            <li>Learned Project proposal writing, managing as well as developing the project.</li>
+            <li>Worked with different field engineers and research officers.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-2">
+      <div class="skills">
+        <h3 class="title">Expertise</h3>
+        <ul class="skills_list description">
+          <li>QA, Automation(Building, Testing, Deployment), DevOps</li>
+          <li>Jenkins, GitLab CI</li>
+          <li>Python, Bash</li>
+          <li>Docker, Virtualized Environment</li>
+          <li>C, C++</li>
+          <li>Cmake, Ctest, Gtest, Pytest</li>
+          <li>Object Orineted Anaysis & Design</li>
+          <li>Git (GitHub, GitLab, Bitbucket)</li>
+          <li>Virtual Box, VMware, VCloud</li>
+          <li>Solid Knowledge of Linux OS</li>
+          <li>Nucleus RTOS, Nucleus ReadyStart, Nucleus SafetyCert</li>
+          <li>Embedded System, Electronics</li>
+          <li>Eclipse, Atmel Studio</li>
+          <li>Microsoft Office, Atlassian suite(Confluence, JIRA)</li>
+        </ul>
+      </div>
+
+      <!--
+      <div class="ref">
+        <h3 class="title">Reference</h3>
+        <div class="ref_item">
+          <h4 class="ref_name">Rashid Chy</h4>
+          <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, neque?</p>
+        </div>
+        <div class="ref_item">
+          <h4 class="ref_name">Ayman Rahman</h4>
+          <p class="description"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+        </div>
+      </div>
+      -->
+
+
+      <div class="certification">
+        <h3 class="title">Certification</h3>
+        <p class="item_preTitle">Click on respective certificate to view</p>
+        <ul class="skills_list description">
+          <li>
+            <a class="cert_item" href="https://www.hackerrank.com/parvaizahmad?hr_r=1" target="_blank">HackerRank</a>
+          </li>
+          
+          <li>
+            <a class="cert_item" href="https://www.udemy.com/certificate/UC-ff412178-3f62-4c14-bc80-f4bbaed3401f/"
+              target="_blank">Advance C Programming</a>
+          </li>
+          
+          <li>
+            <a class="cert_item" href="https://www.udemy.com/certificate/UC-0f7a7ae9-5c54-44c8-8370-af7b93bee593/"
+              target="_blank">C++ From Beginner to Beyond</a>
+          </li>
+          
+          <li>
+            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/b6dad47b9597c0f7f842b33fd6791f34d7907b32beb7b62662fbfaa1582c9b3c?u=73045713/"
+              target="_blank">Parallel and Concurrent Programming with C++ Part 1</a>
+          </li>
+          
+          <li>
+            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/69f017b5c29f600bed21eee5fabde70d8715b38b19c20bc4a99cab126b779462?u=73045713/"
+              target="_blank">Parallel and Concurrent Programming with C++ Part 2</a>
+          </li>
+
+          <li>
+            <a class="cert_item" href="https://www.udemy.com/certificate/UC-fe4d1e70-a8b2-4b2d-b0fc-84106d52db64/"
+              target="_blank">Master CMake for Cross-Platform C++ </a>
+          </li>
+          
+          <li>
+            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/e8ef56158b18767e60959851679a2c95f3a1725c5f2c334da68a147fe7eba7c7?u=73045713/"
+              target="_blank">C++ Best Practices for Developers</a>
+          </li>
+
+          <li>
+            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/497791694fccb7d93205f2bd0a9a5bb1aa0248c1313b4fc8a0f35bb87f551ccc?u=73045713/"
+              target="_blank">Test Driven Development in C++</a>
+          </li>
+
+          <li>
+            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/c3f67c702cd7e8d6ca57bb1e9b0192802030213728a4ed4e411a92bc3fe624df?u=73045713/"
+              target="_blank">Learning Docker</a>
+          </li>
+          
+          <li>
+            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/fe9e391232785374a2437408059f47a6adb50bde1e16b4249c9ed72f8e77ec2c?u=73045713/"
+              target="_blank">Learning Kubernetes</a>
+          </li>
+          
+          <li>
+            <a class="cert_item" href="https://www.udemy.com/certificate/UC-a39459df-9981-4849-9eb1-51fb7c79a20d/"
+              target="_blank">The Git & Github</a>
+          </li>
+          
+          <li>
+            <a class="cert_item" href="https://www.udemy.com/certificate/UC-18e8b674-2381-4117-b352-a375d01feee3/"
+              target="_blank">UML & OOP Desing Foundations</a>
+          </li>
+                    
+        </ul>
+      </div>
+
+
+      <div class="interest">
+        <h3 class="title">Interpersonal Skills</h3>
+        <ul class="skills_list description">
+          <li>Excellent verbal and written communication skills, facilitating effective collaboration and seamless information exchange.</li>
+          <li>Strong team player, fostering a spirit of cooperation and cohesion within diverse teams.</li>
+          <li>Proficient in conducting thorough research and quick to grasp new concepts, demonstrating a keen aptitude for learning.</li>
+          <li>Possessing strong analytical skills to assess complex problems and develop innovative solutions.</li>
+          <li>Adaptability to work in a fast-paced environment with remote teams, ensuring efficient coordination and timely deliverables.</li>
+          <li>Committed to adhering to scheduled and team-agreed timelines, ensuring timely completion of projects.</li>
+          <li>Highly motivated and focused, consistently striving for excellence in all tasks undertaken.</li>
+          <li>Multilingual proficiency in English, Urdu, Punjabi, and Saraiki, facilitating effective communication with diverse stakeholders.</li>
+        </ul>
+      </div>
+
+      <div class="interest">
+        <h3 class="title">Interest</h3>
+        <ul class="skills_list description">
+          <li>Robotics</li>
+          <li>Embedded Systems</li>
+          <li>Reverse Engineering</li>
+          <li>Electronic Circuits</li>
+          <li>Electronics Automation</li>
+          <li>IoT</li>
+          <li>Working with microcontrollers</li>
+          <li>Making Technical videos for YouTube</li>
+          <li>Making Software as well as Hardware Hobby Projects</li>
+        </ul>
+      </div>
+
+      <div class="awards">
+        <h3 class="title">Awards</h3>
+        <div class="awards_item">
+          <h4 class="item_title">Punjab Group of Collages</h4>
+          <p class="item_preTitle">2010-2012</p>
+          <p class=" description">
+            Received merit base Full Fee Scholarship.
+          </p>
+        </div>
+        <div class="awards_item">
+          <h4 class="item_title">Islamia University of Bahawalpur</h4>
+          <p class="item_preTitle">2013</p>
+          <p class="description">
+            Received merit-based Laptop Award from Chief Minister Punjab
+          </p>
+        </div>
+        <div class="awards_item">
+          <h4 class="item_title">Islamia University of Bahawalpur</h4>
+          <p class="item_preTitle">2016</p>
+          <p class="description">
+            Achieved “Shield of Commitment” from the Vice Chancellor of IUB Bahawalpur
+          </p>
+        </div>
+      </div>
+
+      <div class="edu">
+        <h3 class="title">Education</h3>
+        <div class="edu_item">
+          <h4 class="item_title">BSc Electronic Engineering</h4>
+          <p class="item_preTitle">2012-2016</p>
+          <p class="item_subtitle">
+            Islamia University of Bahawalpur</br>
+            Grade: B+ , GPA: 3.74/4.0, 4151/4850 - 85.59%
+          </p>
+        </div>
+        <div class="edu_item">
+          <h4 class="item_title">Pre-Engineering</h4>
+          <p class="item_preTitle">2010-2012</p>
+          <p class="item_subtitle">
+            Punjab College for boys Bahawalpur</br>
+            Grade: A , Marks: 876/1100 - 79.64 %
+          </p>
+        </div>
+        <div class="edu_item">
+          <h4 class="item_title">Secondary School Education/Matric</h4>
+          <p class="item_preTitle">2008-2010</p>
+          <p class="item_subtitle">
+            Al Badar H/S School for boys Head Rajkan</br>
+            Grade: A+ , Marks: 928/1050 - 88.38 %
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <hr>
+    <div class="group-3">
+      <div class="contact">
+        <h3 class="title">Contact</h3>
+        <div class="contact_info">
+          <p class="description">
+            Lahore, Pakistan
+          </p>
+
+          <!-- <p class="description">
+            <a href="/message.html" class="social_item">Send Message</a>
+          </p> -->
+
+          <p class="description">
+            <a href="mailto: aparvaiz89@gmail.com" class="social_item">aparvaiz89@gmail.com</a>
+          </p>
+
+        </div>
+      </div>
+      <div class="social">
+        <h3 class="title">Socials</h3>
+        <div class="social_items">
+          <a href="https://github.com/parvaizahmad" target="_blank" class="social_item">
+            <i data-feather="github"></i>
+            <span>/parvaizahmad</span>
+          </a>
+          <a href="https://gitlab.com/parvaizahmad" target="_blank" class="social_item">
+            <i data-feather="gitlab"></i>
+            <span>/parvaizahmad</span>
+          </a>
+          <a href="https://www.youtube.com/@iparvaizahmad" target="_blank" class="social_item">
+            <i data-feather="youtube"></i>
+            <span>/iparvaizahmad</span>
+          </a>
+          <a href="https://www.linkedin.com/in/parvaizahmad" target="_blank" class="social_item">
+            <i data-feather="linkedin"></i>
+            <span>/parvaizahmad</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-4 --hide-from-pdf">
+      <script type="text/javascript" src="https://www.counters-free.net/count/c1nv"></script><br>
+      <a href='https://www.wgglobal.de/'>WGglobal.de</a>
+      <script type='text/javascript'
+        src='https://whomania.com/ctr?id=b58590ebca8ae9ac013f33ebda116b0b1290d3f4'></script>
+    </div>
+
+  </div>
+  <script>
+    feather.replace()
+  </script>
+
+  <script>
+    var icon = document.getElementById("icon");
+    icon.onclick = function () {
+      document.body.classList.toggle("dark-theme");
+      if (document.body.classList.contains("dark-theme")) {
+        icon.src = "./images/sun.png";
+        icon.title = "Light Mode";
+      } else {
+        icon.src = "./images/moon.png";
+        icon.title = "Dark Mode";
+      }
+    }
+  </script>
+
+  <script>
+    const button = document.getElementById('download-button');
+
+    function generatePDF() {
+      // Choose the element that your content will be rendered to.
+      const element = document.getElementById('content');
+      // Choose the element and save the PDF for your user.
+      html2pdf().from(element).save();
+    }
+
+    button.addEventListener('click', generatePDF);
+  </script>
+</body>
+
+</html>
