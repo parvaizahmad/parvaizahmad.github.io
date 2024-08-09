@@ -1,5 +1,6 @@
 ---
 title: Resume
+layout: resume
 icon: fas fa-file
 order: 4
 redirect_to:
