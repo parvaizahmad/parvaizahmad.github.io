@@ -4,7 +4,7 @@ description: Setting up samba server for file sharing
 categories: [demo, tech]
 date: 2024-08-09 13:45:00 +500
 tags: [samba,setup,linux]     # TAG names should always be lowercase
-pin: true
+pin: false
 math: true
 mermaid: true
 image:
