@@ -41,8 +41,8 @@ social:
     - https://twitter.com/theparvaizahmad # change to your twitter homepage
     - https://github.com/parvaizahmad # change to your github homepage
     # Uncomment below to add more social links
-    # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://www.facebook.com/theparvaizahmad
+    - https://www.linkedin.com/in/parvaizahmad
 
 # Site Verification Settings
 webmaster_verifications:
