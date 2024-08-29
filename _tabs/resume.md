@@ -2,7 +2,7 @@
 title: Resume
 layout: resume
 icon: fas fa-file
-order: 4
+order: 1
 redirect_to:
   - https://parvaiz.pk/cv
 ---
