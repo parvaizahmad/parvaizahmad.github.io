@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irrigation Sequence</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+        }
+        .container {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #007BFF;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="date"] {
+            width: 100%;
+            
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 2em;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            input[type="date"], button {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Irrigation Sequence Finder</h1>
+        <label for="datePicker">Select a date:</label>
+        <input type="date" id="datePicker">
+        <button onclick="displaySequence()">Get Sequence</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function getIrrigationSequence(inputDateStr) {
+            // Define the starting date and sequence
+            const startDateStr = '2024-05-26';
+            const startSequence = ['P', 'B', 'S'];
+            
+            // Convert the input date and start date to Date objects
+            const startDate = new Date(startDateStr);
+            const inputDate = new Date(inputDateStr);
+            
+            // Calculate the difference in weeks between the input date and the start date
+            const deltaWeeks = Math.floor((inputDate - startDate) / (1000 * 60 * 60 * 24 * 7));
+            
+            // Define the sequences based on the pattern
+            const sequences = [
+                ['P', 'B', 'S'],
+                ['S', 'P', 'B'],
+                ['B', 'S', 'P']
+            ];
+            
+            // Determine the sequence for the given date
+            const sequenceForDate = sequences[deltaWeeks % 3];
+            
+            return sequenceForDate;
+        }
+
+        function displaySequence() {
+            const datePicker = document.getElementById('datePicker');
+            const resultDiv = document.getElementById('result');
+            const inputDateStr = datePicker.value;
+
+            if (inputDateStr) {
+                const sequence = getIrrigationSequence(inputDateStr);
+                const inputDate = new Date(inputDateStr);
+                const formattedDate = inputDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                resultDiv.innerHTML = `Irrigation sequence for <strong>${formattedDate}</strong> is:<br><strong>${sequence.join(', ')}</strong>`;
+            } else {
+                resultDiv.innerHTML = 'Please select a date.';
+            }
+        }
+    </script>
+</body>
+</html>
