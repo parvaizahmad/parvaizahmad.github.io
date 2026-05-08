@@ -5,245 +5,441 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parvaiz Ahmad's Resume</title>
+  <title>Parvaiz Ahmad — Certificates</title>
+  <meta name="description" content="Full list of certificates and courses completed by Parvaiz Ahmad.">
   <link rel="icon" type="image/x-icon" href="./images/profileImage.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <script src="https://unpkg.com/feather-icons"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Certificates page extra styles ──────────────────── */
+    .certs-page {
+      width: calc(100% - 48px);
+      max-width: 1100px;
+      margin: 40px auto;
+      background: white;
+      box-shadow:
+        0 2px 6px rgba(0,0,0,0.06),
+        0 10px 28px rgba(0,0,0,0.10),
+        0 28px 64px rgba(0,0,0,0.06);
+    }
+    @media screen and (max-width: 820px) {
+      .certs-page { width: 100%; margin: 0; box-shadow: none; }
+    }
+
+    .certs-page-header {
+      background: var(--dark-bg);
+      padding: 24px 30px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .certs-page-header img {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      flex-shrink: 0;
+    }
+    .certs-header-text h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.02em;
+    }
+    .certs-header-text h1 .hl { color: var(--accent); }
+    .certs-header-text p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+    .certs-header-back {
+      margin-left: auto;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.15s;
+    }
+    .certs-header-back:hover { color: var(--accent); }
+    .certs-header-back svg  { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; }
+
+    .certs-body { padding: 28px 30px; }
+
+    .cert-group { margin-bottom: 30px; break-inside: avoid; }
+    .cert-group:last-child { margin-bottom: 0; }
+
+    .cert-group-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+    }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .cert-entry {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 7px 10px 7px 0;
+      border-bottom: 1px solid var(--line);
+      transition: background 0.12s;
+    }
+    .cert-entry:nth-child(odd)  { padding-right: 18px; border-right: 1px solid var(--line); }
+    .cert-entry:nth-child(even) { padding-left: 18px; }
+    .cert-entry:hover { background: #fafbfc; }
+
+    .cert-icon {
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: 1.05rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .cert-text { min-width: 0; }
+    .cert-name {
+      font-size: 1.2rem;
+      color: var(--text-sub);
+      line-height: 1.4;
+      display: block;
+      transition: color 0.15s;
+    }
+    .cert-name:hover { color: var(--accent); }
+    .cert-issuer {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+      display: block;
+    }
+
+    /* ── print styles for certs page ─────────────────── */
+    @media print {
+      @page {
+        size: A4;
+        margin: 14mm 12mm; /* symmetric — fixes PDF link annotation coordinates */
+      }
+      body { background: white !important; }
+      .action-bar { display: none !important; }
+      .certs-page { width: 100%; margin: 0; box-shadow: none; }
+      .certs-page-header { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .cert-entry:hover { background: none !important; }
+      /* Links: solid orange underline, clearly clickable in PDF */
+      body:not(.print-bw) a.cert-name {
+        color: var(--accent) !important;
+        text-decoration: underline !important;
+        text-decoration-color: var(--accent) !important;
+        text-underline-offset: 2px;
+      }
+      /* Don't append URLs as plain text */
+      a[href]::after { content: none !important; }
+
+      /* B&W override */
+      body.print-bw .certs-page-header { background: white !important; border-top: 4px solid #111 !important; border-bottom: 1px solid #ccc !important; }
+      body.print-bw .certs-header-text h1 { color: #111 !important; }
+      body.print-bw .certs-header-text h1 .hl { color: #111 !important; }
+      body.print-bw .certs-header-text p { color: #555 !important; }
+      body.print-bw .certs-page-header img { border-color: #888 !important; }
+      body.print-bw .cert-group-title { color: #111 !important; border-bottom-color: #aaa !important; }
+      body.print-bw .cert-icon { color: #666 !important; }
+      body.print-bw .cert-name { color: #333 !important; }
+      body.print-bw .cert-issuer { color: #666 !important; }
+    }
+
+    @media screen and (max-width: 820px) {
+      .certs-page { width: 100%; margin: 0; box-shadow: none; }
+      .action-bar { position: static; padding: 12px 16px; background: var(--page-bg); border-bottom: 1px solid var(--line); justify-content: flex-end; }
+      .cert-grid  { grid-template-columns: 1fr; }
+      .cert-entry:nth-child(odd)  { padding-right: 0; border-right: none; }
+      .cert-entry:nth-child(even) { padding-left: 0; }
+    }
+  </style>
 </head>
 
 <body>
-  <div class="container" id="content">
-    <div class="profile">
-      <h4 class="--hide-from-pdf" align="right">Theme</h4>
-      <img class="darklight --hide-from-pdf" src="./images/moon.png" alt="light-theme" id="icon" align="right" title="Dark Mode">
-      <div class="profile_container">
-        <div class="profile_profileImg">
-          <img src="./images/profileImage.png" alt="Parvaiz Ahmad">
-        </div>
-        <div>
-          <h1 class="profile_name">
-            <span class="profile_name_firstName">Parvaiz</span>
-            <span class="profile_name_lastName">Ahmad</span>
-          </h1>
-          <p class="profile_title">Senior Software Development Engineer</p>
-          <p class="description profile_description">
-            With over 8 years of professional experience at Siemens, specializing in C/C++, Python, Automation and related technologies.
-          </p>
-          <br>
-          <!-- <a class="downloadBtn" href="./ParvaizAhmadResume.pdf" download="ParvaizAhmadResume.pdf">Download Resume</a> -->
-          <!-- <button class="downloadBtn" id="download-button">Download Resume</button> -->
-          <a class="downloadBtn --hide-from-pdf"
-            href="https://www.sejda.com/html-to-pdf?save-link=https://parvaiz.pk/cv&viewportWidth=1500"
-            target="_blank"><strong>Download
-              Resume</strong></a>
-          <a class="downloadBtn --show-in-pdf" href="https://parvaiz.pk/cv" style="display:none"><strong>Online
-              Resume</strong></a>
-        </div>
-      </div>
-    </div>
 
-    <div class="group-1">
-
-      <div class="certification">
-        <h3 class="title">Certifications</h3>
-        <p class="item_preTitle">Click on respective certificate to view</p>
-        <ul class="skills_list description">
-          <li>
-            <a class="cert_item" href="https://www.hackerrank.com/parvaizahmad?hr_r=1" 
-            target="_blank">HackerRank</a> 
-          </li>
-
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/1556961c553b3e74e09ba8351b0950a1c8eebfd6ab4008e680134250319faa3d?trk=share_certificate" 
-            target="_blank">Continuous Integration and Continuous Delivery with GitLab</a>
-          </li>
-
-          <li>
-            <a class="cert_item" href="https://www.udemy.com/certificate/UC-a39459df-9981-4849-9eb1-51fb7c79a20d/"
-              target="_blank">The Git & Github</a>
-          </li>
-
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/c3f67c702cd7e8d6ca57bb1e9b0192802030213728a4ed4e411a92bc3fe624df?u=73045713/"
-              target="_blank">Learning Docker</span></a>
-          </li>
-
-           <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/afbc6ea5ca15eab9787771fbb4949d8a9fb8d1f9283cf2b7cff58a3a12b0f185?trk=share_certificate" 
-            target="_blank">Learning Docker Compose</a>
-          </li>
-          
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/fe9e391232785374a2437408059f47a6adb50bde1e16b4249c9ed72f8e77ec2c?u=73045713/"
-              target="_blank">Learning Kubernetes</a>
-          </li>
-
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/aff8ecf663846ed076b882b2914af749dee6c3123eaadc723e35ed1b08f34bc7?trk=share_certificate" 
-            target="_blank">Advanced Kubernetes: 1 Core Concepts</a>
-          </li>
-
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/788e4fabbef4f51dcba11fb997c0bd23ae8898d93bc4f3a327c1bd7d5d828932?trk=share_certificate" 
-            target="_blank">Learning Bash Scripting</a>
-          </li>
-
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/1f2a37fa34a055542bd3782fe5828ba6ccf6c527db6f1c8cb06226f2a421b81c?trk=share_certificate" 
-            target="_blank">Introduction to Linux</a>
-          </li>
-
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/cfa0b5a655eee1bf6275321af0cf412a7eae7eedbcffe47c924da236d7d41a93?trk=share_certificate" 
-            target="_blank">Linux Tips</a>
-          </li>
-
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/56c5927e88c7654b9e7174eef7e64e62a6a485e20d2dc3ebf2c8a548c291b481?trk=share_certificate" 
-            target="_blank">Unit Testing and Test Driven Development in Python</a>
-          </li>
-
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/fb911b280d218e5a51a8174b7061757c4a538d44cebaa06e1a8542a599ccd755?trk=share_certificate" 
-            target="_blank">Unix Essential Training</a>
-          </li>
-          
-          <li>
-            <a class="cert_item" href="https://www.udemy.com/certificate/UC-ff412178-3f62-4c14-bc80-f4bbaed3401f/"
-              target="_blank">Advance C Programming</a>
-          </li>
-          
-          <li>
-            <a class="cert_item" href="https://www.udemy.com/certificate/UC-0f7a7ae9-5c54-44c8-8370-af7b93bee593/"
-              target="_blank">C++ From Beginner to Beyond</a>
-          </li>
-
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/de9a8f8ef8d4a1043520d7943a909e36b1bf6585535477c28a3f4831e522f14e?trk=share_certificate"
-              target="_blank">C++ Standard Template Library</a>
-          </li>
-          
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/b6dad47b9597c0f7f842b33fd6791f34d7907b32beb7b62662fbfaa1582c9b3c?u=73045713/"
-              target="_blank">Parallel and Concurrent Programming with C++ Part 1</a>
-          </li>
-          
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/69f017b5c29f600bed21eee5fabde70d8715b38b19c20bc4a99cab126b779462?u=73045713/"
-              target="_blank">Parallel and Concurrent Programming with C++ Part 2</a>
-          </li>
-
-          <li>
-            <a class="cert_item" href="https://www.udemy.com/certificate/UC-fe4d1e70-a8b2-4b2d-b0fc-84106d52db64/"
-              target="_blank">Master CMake for Cross-Platform C++</a>
-          </li>
-          
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/e8ef56158b18767e60959851679a2c95f3a1725c5f2c334da68a147fe7eba7c7?u=73045713/"
-              target="_blank">C++ Best Practices for Developers</a>
-          </li>
-
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/497791694fccb7d93205f2bd0a9a5bb1aa0248c1313b4fc8a0f35bb87f551ccc?u=73045713/"
-              target="_blank">Test Driven Development in C++</a>
-          </li>
-
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/2c7f06ac911b4a92340737297a9d571e164b22bb64af0d6d30af90f8cca4437b?trk=share_certificate" 
-            target="_blank">Python Essential Training</a>
-          </li>
-          
-          <li>
-            <a class="cert_item" href="https://www.linkedin.com/learning/certificates/497791694fccb7d93205f2bd0a9a5bb1aa0248c1313b4fc8a0f35bb87f551ccc?trk=share_certificate" 
-            target="_blank">Software Development Life Cycle (SDLC)</a>
-          </li>
-
-          <li>
-            <a class="cert_item" href="https://www.udemy.com/certificate/UC-18e8b674-2381-4117-b352-a375d01feee3/"
-              target="_blank">UML & OOP Desing Foundations</a>
-          </li>
-                    
-        </ul>
-      </div>
-    </div>
-
-    <hr>
-    <div class="group-3">
-      <div class="contact">
-        <h3 class="title">Contact</h3>
-        <div class="contact_info">
-          <p class="description">
-            Lahore, Pakistan
-          </p>
-
-          <!-- <p class="description">
-            <a href="/message.html" class="social_item">Send Message</a>
-          </p> -->
-
-          <p class="description">
-            <a href="mailto: aparvaiz89@gmail.com" class="social_item">aparvaiz89@gmail.com</a>
-          </p>
-
-        </div>
-      </div>
-      <div class="social">
-        <h3 class="title">Socials</h3>
-        <div class="social_items">
-          <a href="https://github.com/parvaizahmad" target="_blank" class="social_item">
-            <i data-feather="github"></i>
-            <span>/parvaizahmad</span>
-          </a>
-          <a href="https://gitlab.com/parvaizahmad" target="_blank" class="social_item">
-            <i data-feather="gitlab"></i>
-            <span>/parvaizahmad</span>
-          </a>
-          <a href="https://www.linkedin.com/in/parvaizahmad" target="_blank" class="social_item">
-            <i data-feather="linkedin"></i>
-            <span>/parvaizahmad</span>
-          </a>
-          <a href="https://www.youtube.com/@engr.parvaiz" target="_blank" class="social_item">
-            <i data-feather="youtube"></i>
-            <span>/engr.parvaiz</span>
-          </a>
-          
-        </div>
-      </div>
-    </div>
-
+  <!-- ACTION BAR -->
+  <div class="action-bar">
+    <a class="btn btn-nav" href="./">← Back to CV</a>
+    <button class="btn btn-bw" onclick="printBW()"
+      title="Prints in clean black &amp; white — works on any laser printer.">
+      <i data-feather="printer"></i> B&amp;W PDF
+    </button>
+    <button class="btn btn-download" onclick="openSejda()"
+      title="Opens Sejda to generate a high-quality colour PDF with clickable links.">
+      <i data-feather="download"></i> Colour PDF
+    </button>
   </div>
+
+  <div class="certs-page">
+
+    <!-- HEADER -->
+    <header class="certs-page-header">
+      <img src="./images/profileImage.png" alt="Parvaiz Ahmad">
+      <div class="certs-header-text">
+        <h1>Parvaiz <span class="hl">Ahmad</span></h1>
+        <p>Certificates &amp; Courses</p>
+        <a class="cv-online-link" href="https://parvaiz.pk/cv/certificates" target="_blank">
+          <i data-feather="monitor"></i> View online: parvaiz.pk/cv/certificates
+        </a>
+      </div>
+      <a class="certs-header-back" href="./">
+        <i data-feather="arrow-left"></i> Back to CV
+      </a>
+    </header>
+
+    <!-- BODY -->
+    <div class="certs-body">
+
+      <!-- ── DevOps / CI/CD ─────────────────────────────
+           To add: copy a <div class="cert-entry"> block inside
+           the relevant <div class="cert-grid"> and update
+           the href, cert-name, and cert-issuer. -->
+      <div class="cert-group">
+        <h3 class="cert-group-title">DevOps &amp; CI/CD</h3>
+        <div class="cert-grid">
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/1556961c553b3e74e09ba8351b0950a1c8eebfd6ab4008e680134250319faa3d?trk=share_certificate" target="_blank">Continuous Integration and Continuous Delivery with GitLab</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.udemy.com/certificate/UC-a39459df-9981-4849-9eb1-51fb7c79a20d/" target="_blank">The Git &amp; GitHub Bootcamp</a>
+              <span class="cert-issuer">Udemy</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/c3f67c702cd7e8d6ca57bb1e9b0192802030213728a4ed4e411a92bc3fe624df?u=73045713/" target="_blank">Learning Docker</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/afbc6ea5ca15eab9787771fbb4949d8a9fb8d1f9283cf2b7cff58a3a12b0f185?trk=share_certificate" target="_blank">Learning Docker Compose</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/fe9e391232785374a2437408059f47a6adb50bde1e16b4249c9ed72f8e77ec2c?u=73045713/" target="_blank">Learning Kubernetes</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/aff8ecf663846ed076b882b2914af749dee6c3123eaadc723e35ed1b08f34bc7?trk=share_certificate" target="_blank">Advanced Kubernetes: Core Concepts</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Linux / OS ────────────────────────────────── -->
+      <div class="cert-group">
+        <h3 class="cert-group-title">Linux &amp; OS</h3>
+        <div class="cert-grid">
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/1f2a37fa34a055542bd3782fe5828ba6ccf6c527db6f1c8cb06226f2a421b81c?trk=share_certificate" target="_blank">Introduction to Linux</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/cfa0b5a655eee1bf6275321af0cf412a7eae7eedbcffe47c924da236d7d41a93?trk=share_certificate" target="_blank">Linux Tips</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/788e4fabbef4f51dcba11fb997c0bd23ae8898d93bc4f3a327c1bd7d5d828932?trk=share_certificate" target="_blank">Learning Bash Scripting</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/fb911b280d218e5a51a8174b7061757c4a538d44cebaa06e1a8542a599ccd755?trk=share_certificate" target="_blank">Unix Essential Training</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── C / C++ ────────────────────────────────────── -->
+      <div class="cert-group">
+        <h3 class="cert-group-title">C / C++</h3>
+        <div class="cert-grid">
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.udemy.com/certificate/UC-ff412178-3f62-4c14-bc80-f4bbaed3401f/" target="_blank">Advanced C Programming</a>
+              <span class="cert-issuer">Udemy</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.udemy.com/certificate/UC-0f7a7ae9-5c54-44c8-8370-af7b93bee593/" target="_blank">C++ From Beginner to Beyond</a>
+              <span class="cert-issuer">Udemy</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/de9a8f8ef8d4a1043520d7943a909e36b1bf6585535477c28a3f4831e522f14e?trk=share_certificate" target="_blank">C++ Standard Template Library</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/e8ef56158b18767e60959851679a2c95f3a1725c5f2c334da68a147fe7eba7c7?u=73045713/" target="_blank">C++ Best Practices for Developers</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/b6dad47b9597c0f7f842b33fd6791f34d7907b32beb7b62662fbfaa1582c9b3c?u=73045713/" target="_blank">Parallel and Concurrent Programming with C++ — Part 1</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/69f017b5c29f600bed21eee5fabde70d8715b38b19c20bc4a99cab126b779462?u=73045713/" target="_blank">Parallel and Concurrent Programming with C++ — Part 2</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.udemy.com/certificate/UC-fe4d1e70-a8b2-4b2d-b0fc-84106d52db64/" target="_blank">Master CMake for Cross-Platform C++</a>
+              <span class="cert-issuer">Udemy</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/497791694fccb7d93205f2bd0a9a5bb1aa0248c1313b4fc8a0f35bb87f551ccc?u=73045713/" target="_blank">Test Driven Development in C++</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Python / Testing ───────────────────────────── -->
+      <div class="cert-group">
+        <h3 class="cert-group-title">Python &amp; Testing</h3>
+        <div class="cert-grid">
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/2c7f06ac911b4a92340737297a9d571e164b22bb64af0d6d30af90f8cca4437b?trk=share_certificate" target="_blank">Python Essential Training</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/56c5927e88c7654b9e7174eef7e64e62a6a485e20d2dc3ebf2c8a548c291b481?trk=share_certificate" target="_blank">Unit Testing and TDD in Python</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Software Engineering ───────────────────────── -->
+      <div class="cert-group">
+        <h3 class="cert-group-title">Software Engineering</h3>
+        <div class="cert-grid">
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.linkedin.com/learning/certificates/497791694fccb7d93205f2bd0a9a5bb1aa0248c1313b4fc8a0f35bb87f551ccc?trk=share_certificate" target="_blank">Software Development Life Cycle (SDLC)</a>
+              <span class="cert-issuer">LinkedIn Learning</span>
+            </div>
+          </div>
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.udemy.com/certificate/UC-18e8b674-2381-4117-b352-a375d01feee3/" target="_blank">UML &amp; OOP Design Foundations</a>
+              <span class="cert-issuer">Udemy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── General / Profiles ─────────────────────────── -->
+      <div class="cert-group">
+        <h3 class="cert-group-title">Profiles &amp; Assessments</h3>
+        <div class="cert-grid">
+          <div class="cert-entry">
+            <span class="cert-icon">↗</span>
+            <div class="cert-text">
+              <a class="cert-name" href="https://www.hackerrank.com/parvaizahmad?hr_r=1" target="_blank">HackerRank Profile</a>
+              <span class="cert-issuer">HackerRank</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end certs-body -->
+
+  </div><!-- end certs-page -->
+
   <script>
-    feather.replace()
+    feather.replace({ width: 13, height: 13, strokeWidth: 2 });
   </script>
 
   <script>
-    var icon = document.getElementById("icon");
-    icon.onclick = function () {
-      document.body.classList.toggle("dark-theme");
-      if (document.body.classList.contains("dark-theme")) {
-        icon.src = "./images/sun.png";
-        icon.title = "Light Mode";
-      } else {
-        icon.src = "./images/moon.png";
-        icon.title = "Dark Mode";
-      }
+    /* Switch to sejda-print mode when fetched by Sejda (?print=1).
+     CSS hides the action bar and reveals .cv-online-link. */
+    if (new URLSearchParams(window.location.search).get('print') === '1') {
+      document.body.classList.add('sejda-print');
+    }
+
+    function openSejda() {
+      var url = window.location.origin + window.location.pathname + '?print=1';
+      window.open(
+        'https://www.sejda.com/html-to-pdf?save-link=' + encodeURIComponent(url),
+        '_blank'
+      );
+    }
+
+    function printBW() {
+      document.body.classList.add('print-bw');
+      window.print();
+      window.addEventListener('afterprint', function () {
+        document.body.classList.remove('print-bw');
+      }, { once: true });
     }
   </script>
 
-  <script>
-    const button = document.getElementById('download-button');
-
-    function generatePDF() {
-      // Choose the element that your content will be rendered to.
-      const element = document.getElementById('content');
-      // Choose the element and save the PDF for your user.
-      html2pdf().from(element).save();
-    }
-
-    button.addEventListener('click', generatePDF);
-  </script>
 </body>
 
 </html>
