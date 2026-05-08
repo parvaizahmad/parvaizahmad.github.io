@@ -5,124 +5,403 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Irrigation Sequence</title>
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(160deg, #1a6b3c 0%, #0d3d22 60%, #092b17 100%);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 50vh;
+            align-items: flex-start;
+            padding: 16px 12px 32px;
         }
-        .container {
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 20px;
-            max-width: 600px;
-            width: 90%;
+
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.12);
+            padding: 24px 20px 24px;
+            max-width: 480px;
+            width: 100%;
+            margin-top: 12px;
+        }
+
+        /* ── Header ── */
+        .header {
             text-align: center;
-        }
-        h1 {
-            font-size: 1.8em;
             margin-bottom: 20px;
-            color: #007BFF;
         }
-        label {
+        .header-icon {
+            font-size: 2rem;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .header h1 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #0d3d22;
+            margin-bottom: 2px;
+            letter-spacing: -0.02em;
+        }
+        .header p {
+            font-size: 0.82rem;
+            color: #6b7280;
+        }
+
+        /* ── Date input ── */
+        .field-label {
             display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #374151;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 6px;
         }
         input[type="date"] {
             width: 100%;
-            
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 2em;
-        }
-        button {
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-size: 1em;
+            padding: 14px 14px;
+            border: 1.5px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            color: #111827;
+            background: #f9fafb;
+            outline: none;
+            transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            margin-bottom: 12px;
+            -webkit-appearance: none;
+            appearance: none;
+            touch-action: manipulation;
         }
-        button:hover {
-            background-color: #0056b3;
+        input[type="date"]:focus {
+            border-color: #1a6b3c;
+            box-shadow: 0 0 0 3px rgba(26,107,60,0.15);
+            background: #fff;
         }
-        .result {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #333;
+
+        /* ── Buttons ── */
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
         }
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            h1 {
-                font-size: 1.5em;
-            }
-            input[type="date"], button {
-                font-size: 0.9em;
-            }
+        .btn {
+            flex: 1;
+            padding: 14px 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+            touch-action: manipulation;
+            min-height: 48px;
+        }
+        .btn-today {
+            background: #f0fdf4;
+            color: #166534;
+            border: 1.5px solid #bbf7d0;
+        }
+        .btn-today:hover {
+            background: #dcfce7;
+            border-color: #86efac;
+        }
+        .btn-primary {
+            background: #1a6b3c;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: #155e34;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(26,107,60,0.35);
+        }
+        .btn-primary:active { transform: translateY(0); }
+
+        /* ── Result section ── */
+        .result-section {
+            display: none;
+        }
+        .result-section.visible {
+            display: block;
+            animation: slideUp 0.35s cubic-bezier(0.22,1,0.36,1);
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-meta {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        .result-meta .chosen-date {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #111827;
+        }
+        .result-meta .week-range {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 3px;
+        }
+        .cycle-badge {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 3px 12px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* ── Zone cards ── */
+        .zone-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .zone-card {
+            border-radius: 14px;
+            padding: 20px 10px 16px;
+            text-align: center;
+            transition: transform 0.18s;
+            touch-action: manipulation;
+        }
+        .zone-card:active { transform: scale(0.97); }
+
+        .zone-order {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            opacity: 0.7;
+            margin-bottom: 6px;
+        }
+        .zone-letter {
+            font-size: 2.6rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        .zone-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        /* zone colour themes */
+        .zone-P { background: #dbeafe; color: #1e40af; }
+        .zone-B { background: #dcfce7; color: #15803d; }
+        .zone-S { background: #fef3c7; color: #b45309; }
+
+        /* first slot gets a border highlight */
+        .zone-card.slot-0 { outline: 2.5px solid currentColor; }
+
+        /* ── Week navigation ── */
+        .week-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid #f3f4f6;
+            gap: 8px;
+        }
+        .nav-btn {
+            background: #f9fafb;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #374151;
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+            white-space: nowrap;
+            touch-action: manipulation;
+            min-height: 44px;
+        }
+        .nav-btn:hover {
+            background: #f0fdf4;
+            border-color: #86efac;
+            color: #166534;
+        }
+        .nav-hint {
+            font-size: 0.78rem;
+            color: #9ca3af;
+            text-align: center;
+        }
+
+        /* ── Error ── */
+        .error-msg {
+            display: none;
+            padding: 11px 14px;
+            background: #fef2f2;
+            color: #b91c1c;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            text-align: center;
+            margin-top: -12px;
+            margin-bottom: 14px;
+        }
+        .error-msg.visible { display: block; }
+
+        @media (max-width: 480px) {
+            body { padding: 10px 8px 24px; }
+            .card { padding: 18px 14px 20px; margin-top: 8px; border-radius: 14px; }
+            .header { margin-bottom: 16px; }
+            .header h1 { font-size: 1.2rem; }
+            .btn { padding: 15px 12px; font-size: 0.97rem; }
+            .zone-letter { font-size: 2.4rem; }
+            .zone-card { padding: 16px 6px 12px; }
+            .nav-btn { padding: 12px 12px; font-size: 0.85rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Irrigation Sequence Finder</h1>
-        <label for="datePicker">Select a date:</label>
+    <div class="card">
+
+        <div class="header">
+            <div class="header-icon">🌿</div>
+            <h1>Irrigation Sequence</h1>
+            <p>Find the zone order for any week</p>
+        </div>
+
+        <label class="field-label" for="datePicker">Select a date</label>
         <input type="date" id="datePicker">
-        <button onclick="displaySequence()">Get Sequence</button>
-        <div class="result" id="result"></div>
+
+        <div class="error-msg" id="errorMsg">Please select a date first.</div>
+
+        <div class="btn-row">
+            <button class="btn btn-today" onclick="setToday()">Today</button>
+            <button class="btn btn-primary" onclick="displaySequence()">Get Sequence</button>
+        </div>
+
+        <div class="result-section" id="resultSection">
+            <div class="result-meta">
+                <div class="chosen-date" id="chosenDate"></div>
+                <div class="week-range" id="weekRange"></div>
+                <span class="cycle-badge" id="cycleBadge"></span>
+            </div>
+
+            <div class="zone-grid" id="zoneGrid"></div>
+
+            <div class="week-nav">
+                <button class="nav-btn" onclick="shiftWeek(-1)">&#8592; Prev Week</button>
+                <span class="nav-hint">Browse weeks</span>
+                <button class="nav-btn" onclick="shiftWeek(1)">Next Week &#8594;</button>
+            </div>
+        </div>
+
     </div>
 
     <script>
-        function getIrrigationSequence(inputDateStr) {
-            // Define the starting date and sequence
-            const startDateStr = '2024-05-26';
-            const startSequence = ['P', 'B', 'S'];
-            
-            // Convert the input date and start date to Date objects
-            const startDate = new Date(startDateStr);
-            const inputDate = new Date(inputDateStr);
-            
-            // Calculate the difference in weeks between the input date and the start date
-            const deltaWeeks = Math.floor((inputDate - startDate) / (1000 * 60 * 60 * 24 * 7));
-            
-            // Define the sequences based on the pattern
-            const sequences = [
-                ['P', 'B', 'S'],
-                ['S', 'P', 'B'],
-                ['B', 'S', 'P']
-            ];
-            
-            // Determine the sequence for the given date
-            const sequenceForDate = sequences[deltaWeeks % 3];
-            
-            return sequenceForDate;
+        const START_DATE_STR = '2024-05-26'; // must be the Sunday that anchors the cycle
+        const SEQUENCES = [
+            ['P', 'B', 'S'],
+            ['S', 'P', 'B'],
+            ['B', 'S', 'P'],
+        ];
+        const ORDER_LABELS  = ['1st', '2nd', '3rd'];
+        const ZONE_CSS      = { P: 'zone-P', B: 'zone-B', S: 'zone-S' };
+        const ZONE_NAMES    = { P: 'Zone P', B: 'Zone B', S: 'Zone S' };
+
+        /* Parse YYYY-MM-DD as a *local* date (avoids UTC-midnight timezone shift) */
+        function parseLocal(str) {
+            const [y, m, d] = str.split('-').map(Number);
+            return new Date(y, m - 1, d);
+        }
+
+        function dateToInputVal(date) {
+            const y  = date.getFullYear();
+            const m  = String(date.getMonth() + 1).padStart(2, '0');
+            const d  = String(date.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
+
+        function formatDisplay(date) {
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        /* Sunday of the week containing `date` */
+        function weekSunday(date) {
+            const d = new Date(date);
+            d.setDate(d.getDate() - d.getDay());
+            return d;
+        }
+
+        function getSequence(date) {
+            const start      = parseLocal(START_DATE_STR);
+            const sunday     = weekSunday(date);
+            const deltaDays  = Math.round((sunday - start) / 86400000);
+            const deltaWeeks = Math.floor(deltaDays / 7);
+            const idx        = ((deltaWeeks % 3) + 3) % 3; // safe for negative deltas
+            return { seq: SEQUENCES[idx], cycleWeek: idx + 1 };
+        }
+
+        function renderResult(date) {
+            const { seq, cycleWeek } = getSequence(date);
+            const sunday   = weekSunday(date);
+            const saturday = new Date(sunday);
+            saturday.setDate(saturday.getDate() + 6);
+
+            document.getElementById('chosenDate').textContent = formatDisplay(date);
+            document.getElementById('weekRange').textContent  =
+                `Week: ${formatDisplay(sunday)} – ${formatDisplay(saturday)}`;
+            document.getElementById('cycleBadge').textContent = `Cycle week ${cycleWeek} of 3`;
+
+            document.getElementById('zoneGrid').innerHTML = seq.map((zone, i) => `
+                <div class="zone-card ${ZONE_CSS[zone]} slot-${i}">
+                    <div class="zone-order">${ORDER_LABELS[i]}</div>
+                    <div class="zone-letter">${zone}</div>
+                </div>
+            `).join('');
+
+            const section = document.getElementById('resultSection');
+            section.classList.remove('visible');
+            void section.offsetWidth; // force reflow so animation replays
+            section.classList.add('visible');
+            hideError();
         }
 
         function displaySequence() {
-            const datePicker = document.getElementById('datePicker');
-            const resultDiv = document.getElementById('result');
-            const inputDateStr = datePicker.value;
-
-            if (inputDateStr) {
-                const sequence = getIrrigationSequence(inputDateStr);
-                const inputDate = new Date(inputDateStr);
-                const formattedDate = inputDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-                resultDiv.innerHTML = `Irrigation sequence for <strong>${formattedDate}</strong> is:<br><strong>${sequence.join(', ')}</strong>`;
-            } else {
-                resultDiv.innerHTML = 'Please select a date.';
-            }
+            const val = document.getElementById('datePicker').value;
+            if (!val) { showError('Please select a date first.'); return; }
+            renderResult(parseLocal(val));
         }
+
+        function setToday() {
+            const today = new Date();
+            document.getElementById('datePicker').value = dateToInputVal(today);
+            renderResult(today);
+        }
+
+        function shiftWeek(delta) {
+            const val = document.getElementById('datePicker').value;
+            if (!val) return;
+            const date = parseLocal(val);
+            date.setDate(date.getDate() + delta * 7);
+            document.getElementById('datePicker').value = dateToInputVal(date);
+            renderResult(date);
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('errorMsg');
+            el.textContent = msg;
+            el.classList.add('visible');
+        }
+        function hideError() {
+            document.getElementById('errorMsg').classList.remove('visible');
+        }
+
+        // Auto-load today when the page opens
+        setToday();
     </script>
 </body>
 </html>
